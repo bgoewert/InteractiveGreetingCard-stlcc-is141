@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Holiday Greeting Card</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            border-radius: 2px;
+        }
+
+        table th {
+            text-align: right;
+            padding-right: 0.5em;
+        }
+
+        .credits li {
+            margin: 0.25em 0;
+        }
+    </style>
+    <script src="InteractiveHolidayGreetingCard.js" defer></script>
+    <script async>
+        // Check if autoplay is enabled
+        document.addEventListener( 'DOMContentLoaded', () => {
+            let audio = document.querySelector( 'audio' );
+            let play = audio.play();
+            if ( play !== undefined ) {
+                play.then( _ => {
+                    audio.controls = false;
+                } ).catch( error => {
+                    window.alert( 'Autoplay is disabled. Please click the play button on the audio controls to start the background music.' );
+                    audio.insertAdjacentHTML( 'afterend', '<p style="color:red;">Autoplay is disabled. Please click the play button to start the background music.</p>' );
+                } );
+            }
+        } );
+    </script>
+</head>
+
+<body>
+    <!-- Width and Height is similar to 6x9 greeting card. -->
+    <canvas width="550" height="412"></canvas>
+    <!-- Controls are enabled here because autoplay is disabled on most browsers. -->
+    <audio src="Bethlehem.mp3" autoplay loop controls style="display:block;"></audio>
+    <h1>IS141 Final - Interactive Greeting Card</h1>
+    <table>
+        <tr>
+            <th>Author</th>
+            <td>Brennan Goewert</td>
+        </tr>
+        <tr>
+            <th>Date Created</th>
+            <td>2023-12-12</td>
+        </tr>
+    </table>
+    <h3>Credits</h3>
+    <ul class="credits">
+        <li><a href="https://www.incompetech.com/music/royalty-free/index.html?isrc=USUAN1100307">Oh, Little Town of Bethlehem</a> by <a href="https://incompetech.com">Kevin MacLeod</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></li>
+        <li><a href="https://pngimg.com/image/95505">Christmas Ornaments</a> by <a href="https://pngimg.com">Pngimg.com</a> licensed under <a href="http://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></li>
+        <li><a href="https://www.pngall.com/christmas-png/download/58850">Christmas Tree Star</a> by <a href="https://pngall.com">PNG ALL</a> licensed under <a href="http://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></li>
+        <li><a href="https://www.pinterest.com/pin/295267319315926439/">Christmas Card</a> by <a href="https://www.pinterest.com/cindyswitzer13/">Cindy Switzer - Pinterest</a></li>
+        <li><a href="https://www.pinterest.com/pin/140948663324926805/">Christmas Tree Stand</a> by <a href="https://www.pinterest.com/lumberjocks/">LumberJocks - Pinterest</a></li>
+        <li><a href="https://pngimg.com/image/2516">Fir Tree</a> by <a href="https://pngimg.com">Pngimg.com</a> licensed under <a href="http://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></li>
+        <li><a href="https://flic.kr/p/VHyoDU">Empty Living Room</a> by <a href="https://www.flickr.com/people/156405257@N06/">Malcolm Lawson</a> licensed under <a href="http://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a></li>
+    </ul>
+</body>
+
+</html>
