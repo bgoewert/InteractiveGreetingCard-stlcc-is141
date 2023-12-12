@@ -315,7 +315,8 @@ document.addEventListener( 'DOMContentLoaded', () => {
                 end = true;
             } else {
                 end = false;
-                window.alert( 'You must complete the tree before you can get your gift!' );
+                if ( !baublesOnTree ) window.alert( 'You must decorate the tree before you can get your gift!' );
+                if ( !starOnTree && baublesOnTree ) window.alert( 'You must place the star on top of the tree before you can get your gift!' );
             }
         }
     } );
