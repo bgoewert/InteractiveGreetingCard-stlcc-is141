@@ -4,6 +4,10 @@ if ( typeof $ === 'undefined' ) {
     var $ = selector => selector.includes( '#' ) ? document.querySelector( selector ) : document.querySelectorAll( selector );
 }
 
+// Get query params for debugging
+const queryString = window.location.search;
+const urlParams = new URLSearchParams( queryString );
+
 let cursor = {
     x: 0,
     y: 0,
@@ -176,12 +180,21 @@ document.addEventListener( 'DOMContentLoaded', () => {
     // Create the Christmas card
     card = new Picture( context, 0, 0, 'images/Christmas Card.jpg', canvas.width );
 
-    // Draw directions
-    context.font = 'Bold 24px Arial';
-    context.fillStyle = '#003300';
+    // Create directions
+    let headingFont = 'Bold 24px Arial';
+    let headingColor = '#003300';
+    context.font = headingFont;
+    context.fillStyle = headingColor;
     let headingX = 40;
     let headingLines = wrapText( context, 'Decorate the tree to get a gift! Once you are complete, press the END key.', 40, 40, 24, canvas.width - 80 );
     let animateHeadingStartX = -canvas.width;
+
+    // Create end message
+    let endFont = 'Bold Italic 32px Times New Roman';
+    let endColor = '#003300';
+    context.font = endFont;
+    context.fillStyle = endColor;
+    let endLines = wrapText( context, 'Happy Holidays!', 30, canvas.height - 30, 32, canvas.width - 80 );
 
     function drawObjects() {
 
@@ -211,11 +224,16 @@ document.addEventListener( 'DOMContentLoaded', () => {
         context.clearRect( 0, 0, canvas.width, canvas.height );
         // canvas.width = canvas.width;
 
-        if ( baublesOnTree && starOnTree && end ) {
+        if ( ( baublesOnTree && starOnTree && end ) || urlParams.get( 'end' ) ) {
             // window.alert( 'Merry Christmas!' );
 
             // Draw Christmas card image
             card.draw();
+
+            // Draw end message
+            context.font = endFont;
+            context.fillStyle = endColor;
+            endLines.forEach( line => context.fillText( line[ 0 ], line[ 1 ], line[ 2 ] ) );
 
             baubles.forEach( b => b.loaded = false );
             tree.loaded = false;
@@ -234,6 +252,8 @@ document.addEventListener( 'DOMContentLoaded', () => {
             star.draw();
 
             // Draw directions
+            context.font = headingFont;
+            context.fillStyle = headingColor;
             if ( animateHeadingStartX < headingX ) animateHeadingStartX += 10;
             headingLines.forEach( line => context.fillText( line[ 0 ], animateHeadingStartX, line[ 2 ] ) );
             // console.log( headingLines );

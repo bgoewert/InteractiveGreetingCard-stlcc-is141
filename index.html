@@ -29,7 +29,7 @@
                 play.then( _ => {
                     audio.controls = false;
                 } ).catch( error => {
-                    window.alert( 'Autoplay is disabled. Please click the play button on the audio controls to start the background music.' );
+                    // window.alert( 'Autoplay is disabled. Please click the play button on the audio controls to start the background music.' );
                     audio.insertAdjacentHTML( 'afterend', '<p style="color:red;">Autoplay is disabled. Please click the play button to start the background music.</p>' );
                 } );
             }
